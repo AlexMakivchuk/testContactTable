@@ -1,0 +1,32 @@
+<div class="contacts">
+  <form [formGroup]="ContactForm" >
+    <div>
+      <mat-form-field class="example-full-width">
+        <textarea matInput [attr.disabled]="disableForm" placeholder="Add Name" formControlName="name"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <textarea matInput [attr.disabled]="disableForm" placeholder="Phone" formControlName="phone"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <textarea  matInput readonly placeholder="Id" formControlName="id"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <textarea matInput [attr.disabled]="disableForm" placeholder="Foto" formControlName="foto"></textarea>
+      </mat-form-field>
+    </div>
+
+    <span class="example-button-row">
+          <button mat-raised-button
+                  [disabled]="ContactForm.invalid" (click)="onSubmit()">Save</button>
+        </span>
+    <span class="example-button-row">
+          <button mat-raised-button [disabled]="disableForm" (click)="deleteContact(contact.id)">Delete</button>
+        </span>
+  </form >
+</div>

@@ -1,0 +1,54 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.example-button-row button{
+  width: 10%;
+}
+
+.example-full-width {
+  width: 80%;
+  margin-right: 20px;
+}
+.contacts{
+  padding: 20px;
+  margin: 20px;
+  width: 700px;
+  height: 100%;
+}
+table {
+  width: 100%;
+}
+.delete{
+  margin-left: 50px;
+  color: #aa0000;
+  cursor: pointer;
+}
+.delete:hover{
+  color: red;
+}
+
+
+th.element-id{
+  width: 30%;
+  text-align: center;
+}
+th.element-name{
+
+  width: 70%;
+  text-align: center;
+}
+td{
+  text-align: center;
+}
+
+button.element-name{
+  width: 100%;
+}
+.example-button-row{
+  margin-left: 60px;
+}
+button{
+  margin-right: 20px;
+}

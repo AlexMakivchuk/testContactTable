@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {GetDataService} from "../../shared/services/get-data.service";
-import {ContactModel} from "../../shared/interfaces/contact.model";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {DataService} from '../../shared/services/data.service';
+import {ContactModel} from '../../shared/model/contact.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-open-contact-info',
@@ -9,40 +9,46 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./open-contact-info.component.scss']
 })
 export class OpenContactInfoComponent implements OnInit {
-  public contact:  ContactModel = {name:'', phone: null, foto: '', id: null};
-  ContactForm: FormGroup;
-  disableForm= false;
-  constructor(private getDataService: GetDataService,
-              private formBuilder: FormBuilder,) {
-    this.buildForm();
-    this.contact = getDataService.ContactInfo;
 
+  public contact: ContactModel = {name: '', phone: null, photo: '', id: null};
+  formGroup: FormGroup;
+  disableForm = false;
+
+  constructor(private getDataService: DataService,
+              private formBuilder: FormBuilder) {
+    this.buildForm();
+    this.contact = getDataService.contactModel.getValue();
   }
 
   ngOnInit() {
-    this.ContactForm.setValue(this.contact);
-
+    this.formGroup.setValue(this.contact);
   }
-  get name() { return this.ContactForm.get('name'); }
-  get phone() { return this.ContactForm.get('phone'); }
+
+  get name() {
+    return this.formGroup.get('name');
+  }
+
+  get phone() {
+    return this.formGroup.get('phone');
+  }
 
   private buildForm() {
-    this.ContactForm = new FormGroup({
-      name: new FormControl('',[Validators.required, Validators.minLength(3)]),
+    this.formGroup = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       phone: new FormControl(),
       id: new FormControl(),
-      foto: new FormControl()
-    })
+      photo: new FormControl()
+    });
   }
+
   private onSubmit() {
-    this.getDataService.saveUserData(this.ContactForm.value);
-    this.ContactForm.reset();
-
-
+    this.getDataService.saveUserData(this.formGroup.value).subscribe();
+    this.formGroup.reset();
   }
-  private deleteContact(id: number){
-    this.getDataService.deleteContact(id);
-    this.ContactForm.reset();
+
+  private deleteContact(id: number) {
+    this.getDataService.deleteContact(id).subscribe();
+    this.formGroup.reset();
     this.disableForm = true;
 
   }

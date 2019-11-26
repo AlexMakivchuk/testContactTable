@@ -2,15 +2,15 @@ export class ContactModel {
   id: number;
   name: string;
   phone: string;
-  foto: string;
+  photo: string;
+
   constructor(id: number,
               name: string,
               phone: string,
-              foto: string
-              ) {
+              photo: string) {
     this.id = id;
     this.name = name;
     this.phone = phone;
-    this.foto = foto;
+    this.photo = photo;
   }
 }

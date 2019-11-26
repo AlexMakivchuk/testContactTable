@@ -1,18 +1,19 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {ContactModel} from "../../shared/interfaces/contact.model";
-import {GetDataService} from "../../shared/services/get-data.service";
-import {MatTable} from "@angular/material/table";
+import {ContactModel} from '../../shared/model/contact.model';
+import {DataService} from '../../shared/services/data.service';
+import {MatTable} from '@angular/material/table';
 
 /**
  * @title Bottom Sheet Overview
  */
 @Component({
   selector: 'bottom-sheet-overview-example',
-  templateUrl: 'bottom-sheet-overview-example.html',
+  templateUrl: 'bottom-sheet-overview-example.html'
 })
 export class BottomSheetOverviewExample {
-  constructor(private _bottomSheet: MatBottomSheet) {}
+  constructor(private _bottomSheet: MatBottomSheet) {
+  }
 
   openBottomSheet(): void {
     this._bottomSheet.open(BottomSheetOverviewExampleSheet);
@@ -22,13 +23,15 @@ export class BottomSheetOverviewExample {
 @Component({
   selector: 'bottom-sheet-overview-example-sheet',
   templateUrl: 'bottom-sheet-overview-example-sheet.html',
-  styleUrls: ['bottom-sheet-overview-example-sheet.scss'],
+  styleUrls: ['bottom-sheet-overview-example-sheet.scss']
 })
 export class BottomSheetOverviewExampleSheet {
   table;
+
   @ViewChild(MatTable, {static: false}) set matTable(mt: MatTable<Element>) {
     this.table = mt;
   }
+
   findValue;
   myArray;
   dataSource = [];
@@ -36,40 +39,34 @@ export class BottomSheetOverviewExampleSheet {
   displayedColumns: string[] = ['id', 'name', 'phone', 'photo'];
 
   public contact: ContactModel;
+
   constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
-              private getDataService: GetDataService,
-              ) {
+              private getDataService: DataService) {
   }
 
   openLink(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
     event.preventDefault();
-
   }
-  click(value:any){
-    this.myArray = this.getDataService.allContacts;
+
+  click(value: any) {
+    this.myArray = this.getDataService.allContacts.getValue();
     switch (value) {
-      case 'name':{
+      case 'name': {
         this.dataSource = this.myArray.filter(x => x.name === this.findValue);
 
         break;
       }
-      case 'phone':{
+      case 'phone': {
         this.dataSource = this.myArray.filter(x => x.phone === this.findValue);
         break;
       }
-      case 'id':{
-        this.findValue= +this.findValue;
+      case 'id': {
+        this.findValue = +this.findValue;
         this.dataSource = this.myArray.filter(x => x.id === this.findValue);
         break;
       }
-
-
     }
-
-
-
-
   }
 
 

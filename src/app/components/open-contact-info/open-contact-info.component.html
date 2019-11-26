@@ -1,5 +1,5 @@
 <div class="contacts">
-  <form [formGroup]="ContactForm" >
+  <form [formGroup]="formGroup" >
     <div>
       <mat-form-field class="example-full-width">
         <textarea matInput [attr.disabled]="disableForm" placeholder="Add Name" formControlName="name"></textarea>
@@ -17,13 +17,13 @@
     </div>
     <div>
       <mat-form-field class="example-full-width">
-        <textarea matInput [attr.disabled]="disableForm" placeholder="Foto" formControlName="foto"></textarea>
+        <textarea matInput [attr.disabled]="disableForm" placeholder="Photo" formControlName="photo"></textarea>
       </mat-form-field>
     </div>
 
     <span class="example-button-row">
           <button mat-raised-button
-                  [disabled]="ContactForm.invalid" (click)="onSubmit()">Save</button>
+                  [disabled]="formGroup.invalid" (click)="onSubmit()">Save</button>
         </span>
     <span class="example-button-row">
           <button mat-raised-button [disabled]="disableForm" (click)="deleteContact(contact.id)">Delete</button>

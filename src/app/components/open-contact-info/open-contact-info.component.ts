@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from '../../shared/services/data.service';
-import {ContactModel} from '../../shared/model/contact.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ContactStoreService} from '../../shared/services/contact-store.service';
 
 @Component({
   selector: 'app-open-contact-info',
@@ -10,18 +9,17 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class OpenContactInfoComponent implements OnInit {
 
-  public contact: ContactModel = {name: '', phone: null, photo: '', id: null};
   formGroup: FormGroup;
   disableForm = false;
 
-  constructor(private getDataService: DataService,
-              private formBuilder: FormBuilder) {
+  constructor(private contactStoreService: ContactStoreService) {
     this.buildForm();
-    this.contact = getDataService.contactModel.getValue();
   }
 
   ngOnInit() {
-    this.formGroup.setValue(this.contact);
+    this.contactStoreService
+      .getSelectedContact()
+      .subscribe(c => this.formGroup.reset(c));
   }
 
   get name() {
@@ -35,21 +33,21 @@ export class OpenContactInfoComponent implements OnInit {
   private buildForm() {
     this.formGroup = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      phone: new FormControl(),
+      phone: new FormControl(''),
       id: new FormControl(),
-      photo: new FormControl()
+      photo: new FormControl('')
     });
   }
 
   private onSubmit() {
-    this.getDataService.saveUserData(this.formGroup.value).subscribe();
-    this.formGroup.reset();
+    this.contactStoreService.updateContact(this.formGroup.value).subscribe();
   }
 
   private deleteContact(id: number) {
-    this.getDataService.deleteContact(id).subscribe();
-    this.formGroup.reset();
-    this.disableForm = true;
-
+    // TODO
+    // this.getDataService.deleteContact(id).subscribe();
+    // this.formGroup.reset();
+    // this.disableForm = true;
   }
+
 }

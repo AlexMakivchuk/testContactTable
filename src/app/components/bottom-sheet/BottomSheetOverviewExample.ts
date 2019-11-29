@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {ContactModel} from '../../shared/model/contact.model';
-import {DataService} from '../../shared/services/data.service';
 import {MatTable} from '@angular/material/table';
+import {ContactStoreService} from "../../shared/services/contact-store.service";
 
 /**
  * @title Bottom Sheet Overview
@@ -32,16 +32,16 @@ export class BottomSheetOverviewExampleSheet {
     this.table = mt;
   }
 
-  findValue;
+  findValue: string;
   myArray;
-  dataSource = [];
+  dataSource: ContactModel[] = [];
   selected = 'name';
   displayedColumns: string[] = ['id', 'name', 'phone', 'photo'];
 
   public contact: ContactModel;
 
   constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
-              private getDataService: DataService) {
+              private contactStoreService: ContactStoreService) {
   }
 
   openLink(event: MouseEvent): void {
@@ -49,24 +49,28 @@ export class BottomSheetOverviewExampleSheet {
     event.preventDefault();
   }
 
-  click(value: any) {
-    this.myArray = this.getDataService.allContacts.getValue();
-    switch (value) {
-      case 'name': {
-        this.dataSource = this.myArray.filter(x => x.name === this.findValue);
+  click(contactKey: string): void {
+    this.contactStoreService
+      .findContact(c => c[contactKey] === this.findValue)
+      .subscribe(result => this.dataSource = result);
 
-        break;
-      }
-      case 'phone': {
-        this.dataSource = this.myArray.filter(x => x.phone === this.findValue);
-        break;
-      }
-      case 'id': {
-        this.findValue = +this.findValue;
-        this.dataSource = this.myArray.filter(x => x.id === this.findValue);
-        break;
-      }
-    }
+    // this.myArray = this.getDataService.allContacts.getValue();
+    // switch (value) {
+    //   case 'name': {
+    //     this.dataSource = this.myArray.filter(x => x.name === this.findValue);
+    //
+    //     break;
+    //   }
+    //   case 'phone': {
+    //     this.dataSource = this.myArray.filter(x => x.phone === this.findValue);
+    //     break;
+    //   }
+    //   case 'id': {
+    //     this.findValue = +this.findValue;
+    //     this.dataSource = this.myArray.filter(x => x.id === this.findValue);
+    //     break;
+    //   }
+    // }
   }
 
 

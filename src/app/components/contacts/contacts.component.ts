@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from '../../shared/services/data.service';
 import {ContactModel} from '../../shared/model/contact.model';
+import {ContactStoreService} from '../../shared/services/contact-store.service';
 
 
 @Component({
@@ -27,14 +27,14 @@ export class ContactsComponent implements OnInit {
     this.contactToggle = !this.contactToggle;
   }
 
-  constructor(public getDataService: DataService) {
+  constructor(public contactStoreService: ContactStoreService) {
   }
 
   ngOnInit() {
-    this.getDataService.loadContacts();
-    this.getDataService.allContacts.subscribe((x) => {
+    this.contactStoreService.getContacts().subscribe((x) => {
       this.dataSource = x.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     });
+    this.contactStoreService.loadContacts();
   }
 
   backToContacts() {
@@ -42,8 +42,8 @@ export class ContactsComponent implements OnInit {
     this.contactToggle = false;
   }
 
-  openContactInfo(contact: ContactModel) {
-    this.getDataService.contactModel.next(contact);
+  openContactInfo(contact: ContactModel): void {
+    this.contactStoreService.selectContact(contact);
     this.contactToggle = false;
     this.toogle = false;
   }

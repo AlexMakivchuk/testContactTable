@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ContactModel} from '../../shared/model/contact.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {DataService} from '../../shared/services/data.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ContactStoreService} from '../../shared/services/contact-store.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -9,15 +8,14 @@ import {DataService} from '../../shared/services/data.service';
   styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent implements OnInit {
-  public contact: ContactModel = {name: '', phone: null, photo: '', id: null};
+
   addContactForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-              private getDataService: DataService) {
-    this.buildForm();
+  constructor(public contactStoreService: ContactStoreService) {
   }
 
   ngOnInit() {
+    this.buildForm();
   }
 
   private buildForm() {
@@ -27,13 +25,10 @@ export class AddContactComponent implements OnInit {
     });
   }
 
-  private onSubmit() {
-    this.contact.name = this.addContactForm.value.name;
-    this.contact.phone = this.addContactForm.value.number;
-    this.getDataService.addContact(this.contact).subscribe();
-    this.addContactForm.reset();
-
-
+  private onSubmit(): void {
+    this.contactStoreService
+      .addContact(this.addContactForm.value)
+      .subscribe(() => this.addContactForm.reset(), () => alert('Can\'t add'));
   }
 
 }

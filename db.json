@@ -2,15 +2,25 @@
   "contacts": [
     {
       "name": "alw",
-      "phone": "1111",
-      "foto": "",
-      "id": 5
+      "phone": "11",
+      "id": 5,
+      "photo": null
     },
     {
       "name": "alexa",
       "phone": "11111111",
-      "foto": "",
-      "id": 6
+      "id": 6,
+      "photo": null
+    },
+    {
+      "name": "wsqswq",
+      "number": "qswqswq",
+      "id": 7
+    },
+    {
+      "name": "qwert",
+      "number": "qwert",
+      "id": 8
     }
   ]
 }

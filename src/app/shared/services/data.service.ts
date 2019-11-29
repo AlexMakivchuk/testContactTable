@@ -3,33 +3,20 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ContactModel} from '../model/contact.model';
 
-export const URL = 'http://localhost:3000/';
 
 // Нарушає SRP з SOLID принципів. Рознести на 2 класи контакти та юзер
 @Injectable({providedIn: 'root'})
 export class DataService {
 
   // Type?
-  public allContacts: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  public contactModel: BehaviorSubject<ContactModel> = new BehaviorSubject(undefined);
+  // public allContacts: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  // public contactModel: BehaviorSubject<ContactModel> = new BehaviorSubject(undefined);
   // See: Subject, BehaviorSubject, AsyncSubject, EventEmitter, ReplaySubject
   // Observable, Promise
 
   constructor(public httpClient: HttpClient) {
   }
 
-  // @ts-ignore
-  public loadContacts(): Promise<[]> {
-    return this.httpClient.get<[]>(URL + 'contacts').toPromise();
-  }
-
-  public addContact(contact: ContactModel): Observable<any> {
-    return this.httpClient.post(URL + 'contacts', contact);
-  }
-
-  public deleteContact(id: number): Observable<any> {
-    return this.httpClient.delete(URL + 'contacts/' + id);
-  }
 
   saveUserData(contact: ContactModel): Observable<any> {
     return this.httpClient.put(URL + 'contacts/' + contact.id, contact);

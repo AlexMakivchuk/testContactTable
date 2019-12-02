@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContactStoreService} from '../../shared/services/contact-store.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-open-contact-info',
@@ -12,7 +13,10 @@ export class OpenContactInfoComponent implements OnInit {
   formGroup: FormGroup;
   disableForm = false;
 
-  constructor(private contactStoreService: ContactStoreService) {
+  constructor(
+              private contactStoreService: ContactStoreService,
+              private router: Router
+  ) {
     this.buildForm();
   }
 
@@ -44,10 +48,10 @@ export class OpenContactInfoComponent implements OnInit {
   }
 
   private deleteContact(id: number) {
-    // TODO
-    // this.getDataService.deleteContact(id).subscribe();
-    // this.formGroup.reset();
-    // this.disableForm = true;
+    console.log(id);
+    this.contactStoreService.deleteContact(id).subscribe(()=>
+      this.router.navigate(['contacts'])
+    );
   }
 
 }

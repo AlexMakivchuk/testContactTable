@@ -1,26 +1,14 @@
 {
   "contacts": [
     {
-      "name": "alw",
-      "phone": "11",
-      "id": 5,
-      "photo": null
+      "name": "Axel",
+      "phone": "2232121",
+      "id": 2
     },
     {
-      "name": "alexa",
-      "phone": "11111111",
-      "id": 6,
-      "photo": null
-    },
-    {
-      "name": "wsqswq",
-      "number": "qswqswq",
-      "id": 7
-    },
-    {
-      "name": "qwert",
-      "number": "qwert",
-      "id": 8
+      "name": "Alexa",
+      "phone": "321343543",
+      "id": 3
     }
   ]
 }

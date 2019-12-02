@@ -17,6 +17,7 @@ import {
 import {DemoMaterialModule} from './components/bottom-sheet/material-module';
 import {AddContactComponent} from './components/add-contact/add-contact.component';
 import {OpenContactInfoComponent} from './components/open-contact-info/open-contact-info.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import {OpenContactInfoComponent} from './components/open-contact-info/open-cont
     ReactiveFormsModule,
     MatButtonModule,
     MatListModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    AppRoutingModule
+
   ],
   entryComponents: [BottomSheetOverviewExample, BottomSheetOverviewExampleSheet],
   providers: [],

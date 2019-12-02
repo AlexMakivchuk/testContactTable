@@ -1,3 +1,4 @@
+<button  [routerLink]="['../contacts']" class="example-button-row" mat-raised-button >Back</button>
 <div class="contacts">
   <form [formGroup]="formGroup" >
     <div>
@@ -26,7 +27,7 @@
                   [disabled]="formGroup.invalid" (click)="onSubmit()">Save</button>
         </span>
     <span class="example-button-row">
-          <button mat-raised-button [disabled]="disableForm" (click)="deleteContact(contact.id)">Delete</button>
+          <button mat-raised-button [disabled]="disableForm" (click)="deleteContact(formGroup.value.id)">Delete</button>
         </span>
   </form >
 </div>

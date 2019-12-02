@@ -32,7 +32,7 @@ export class BottomSheetOverviewExampleSheet {
     this.table = mt;
   }
 
-  findValue: string;
+  findValue: any;
   myArray;
   dataSource: ContactModel[] = [];
   selected = 'name';
@@ -50,10 +50,16 @@ export class BottomSheetOverviewExampleSheet {
   }
 
   click(contactKey: string): void {
-    this.contactStoreService
-      .findContact(c => c[contactKey] === this.findValue)
-      .subscribe(result => this.dataSource = result);
-
+    if(contactKey === 'id') {
+      this.findValue = +this.findValue;
+      this.contactStoreService
+        .findContact(c => c[contactKey] === this.findValue)
+        .subscribe(result => this.dataSource = result);
+    } else {
+      this.contactStoreService
+        .findContact(c => c[contactKey] === this.findValue)
+        .subscribe(result => this.dataSource = result);
+    }
     // this.myArray = this.getDataService.allContacts.getValue();
     // switch (value) {
     //   case 'name': {

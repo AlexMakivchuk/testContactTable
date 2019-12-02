@@ -58,4 +58,7 @@ export class ContactStoreService {
         tap(() => this.loadContacts())
       );
   }
+  public deleteContact(id: number) {
+    return this.contactApiService.deleteContact(id)
+  }
 }

@@ -1,3 +1,4 @@
+<button  [routerLink]="['../contacts']" class="example-button-row" mat-raised-button >Back</button>
 <div class="contacts">
   <form [formGroup]="addContactForm" (ngSubmit)="onSubmit()">
     <div>
@@ -7,7 +8,7 @@
     </div>
     <div>
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Phone" formControlName="number"></textarea>
+        <textarea matInput placeholder="Phone" formControlName="phone"></textarea>
       </mat-form-field>
     </div>
     <span class="example-button-row">

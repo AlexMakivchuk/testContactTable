@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContactStoreService} from '../../shared/services/contact-store.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-contact',
@@ -11,7 +12,8 @@ export class AddContactComponent implements OnInit {
 
   addContactForm: FormGroup;
 
-  constructor(public contactStoreService: ContactStoreService) {
+  constructor(public contactStoreService: ContactStoreService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -21,14 +23,14 @@ export class AddContactComponent implements OnInit {
   private buildForm() {
     this.addContactForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      number: new FormControl()
+      phone: new FormControl()
     });
   }
 
   private onSubmit(): void {
     this.contactStoreService
       .addContact(this.addContactForm.value)
-      .subscribe(() => this.addContactForm.reset(), () => alert('Can\'t add'));
+      .subscribe(() => this.router.navigate(['../contacts']), () => alert('Can\'t add'));
   }
 
 }

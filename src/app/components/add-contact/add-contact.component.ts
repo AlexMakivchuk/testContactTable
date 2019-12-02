@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContactStoreService} from '../../shared/services/contact-store.service';
 import {Router} from "@angular/router";
+// @ts-ignore
+import {fadeStateTrigger} from "../../shared/animations";
 
 @Component({
   selector: 'app-add-contact',
   templateUrl: './add-contact.component.html',
-  styleUrls: ['./add-contact.component.scss']
+  styleUrls: ['./add-contact.component.scss'],
+  animations: [fadeStateTrigger]
 })
 export class AddContactComponent implements OnInit {
 

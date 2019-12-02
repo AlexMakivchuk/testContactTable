@@ -1,9 +1,5 @@
-  <!--<div >
-    <button *ngIf="toogle" class="example-button-row" mat-raised-button (click)="toogleComponents()">Add Contact</button>
-    <button *ngIf="!toogle" class="example-button-row" mat-raised-button (click)="backToContacts()">Back</button>
+<div [@fade]>
 
-  </div>
--->
   <button [routerLink]="['../add-contact']" class="example-button-row" mat-raised-button >Add Contact</button>
   <bottom-sheet-overview-example *ngIf="toogle"></bottom-sheet-overview-example>
   <div class="contacts" *ngIf="toogle && !contactToggle">
@@ -24,6 +20,6 @@
     </div>
 
 </div>
-
+</div>
 <!--  <app-add-contact *ngIf="!toogle && contactToggle"></app-add-contact>-->
 <!--  <app-open-contact-info *ngIf="!toogle && !contactToggle"></app-open-contact-info>-->

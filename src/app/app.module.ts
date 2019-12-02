@@ -41,7 +41,7 @@ import {AppRoutingModule} from "./app-routing.module";
     MatButtonModule,
     MatListModule,
     DemoMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
 
   ],
   entryComponents: [BottomSheetOverviewExample, BottomSheetOverviewExampleSheet],

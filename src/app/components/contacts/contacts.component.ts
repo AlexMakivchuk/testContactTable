@@ -2,31 +2,26 @@ import {Component, OnInit} from '@angular/core';
 import {ContactModel} from '../../shared/model/contact.model';
 import {ContactStoreService} from '../../shared/services/contact-store.service';
 import {Router} from "@angular/router";
+// @ts-ignore
+import {fadeStateTrigger} from "../../shared/animations";
 
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss']
+  styleUrls: ['./contacts.component.scss'],
+  animations:[fadeStateTrigger]
 })
 export class ContactsComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'id'];
   dataSource;
-
-  public paginator;
+  active= false;
   public contacts = [];
   public contact: ContactModel = {name: ' ', phone: '', id: null, photo: ' '};
   toogle = true;
   contactToggle = false;
 
-  toogleComponents() {
-    if (this.toogle === true) {
-
-    }
-    this.toogle = !this.toogle;
-    this.contactToggle = !this.contactToggle;
-  }
 
   constructor(public contactStoreService: ContactStoreService,
               private router: Router) {
@@ -39,15 +34,11 @@ export class ContactsComponent implements OnInit {
     this.contactStoreService.loadContacts();
   }
 
-  backToContacts() {
-    this.toogle = true;
-    this.contactToggle = false;
-    this.contactStoreService.loadContacts();
-  }
 
-  openContactInfo(contact: ContactModel): void {
+  openContactInfo(contact: ContactModel) {
     this.contactStoreService.selectContact(contact);
     this.router.navigate(['contact-info']);
+    return this.active = !this.active;
 
   }
 

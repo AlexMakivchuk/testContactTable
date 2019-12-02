@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContactStoreService} from '../../shared/services/contact-store.service';
 import {Router} from "@angular/router";
+// @ts-ignore
+import {fadeStateTrigger} from "../../shared/animations";
 
 @Component({
   selector: 'app-open-contact-info',
   templateUrl: './open-contact-info.component.html',
-  styleUrls: ['./open-contact-info.component.scss']
+  styleUrls: ['./open-contact-info.component.scss'],
+  animations:[fadeStateTrigger]
 })
 export class OpenContactInfoComponent implements OnInit {
 

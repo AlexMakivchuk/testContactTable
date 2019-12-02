@@ -1,10 +1,11 @@
   <!--<div >
     <button *ngIf="toogle" class="example-button-row" mat-raised-button (click)="toogleComponents()">Add Contact</button>
     <button *ngIf="!toogle" class="example-button-row" mat-raised-button (click)="backToContacts()">Back</button>
-    <bottom-sheet-overview-example *ngIf="toogle"></bottom-sheet-overview-example>
+
   </div>
 -->
   <button [routerLink]="['../add-contact']" class="example-button-row" mat-raised-button >Add Contact</button>
+  <bottom-sheet-overview-example *ngIf="toogle"></bottom-sheet-overview-example>
   <div class="contacts" *ngIf="toogle && !contactToggle">
     <div >
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

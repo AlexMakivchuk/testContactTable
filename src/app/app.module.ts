@@ -10,22 +10,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
-import {
-  BottomSheetOverviewExample,
-  BottomSheetOverviewExampleSheet
-} from './components/bottom-sheet/BottomSheetOverviewExample';
-import {DemoMaterialModule} from './components/bottom-sheet/material-module';
 import {AddContactComponent} from './components/add-contact/add-contact.component';
 import {OpenContactInfoComponent} from './components/open-contact-info/open-contact-info.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
-    BottomSheetOverviewExample,
-    BottomSheetOverviewExampleSheet,
     AddContactComponent,
     OpenContactInfoComponent
 
@@ -40,11 +34,11 @@ import {AppRoutingModule} from "./app-routing.module";
     ReactiveFormsModule,
     MatButtonModule,
     MatListModule,
-    DemoMaterialModule,
     AppRoutingModule,
+    MatSelectModule,
 
   ],
-  entryComponents: [BottomSheetOverviewExample, BottomSheetOverviewExampleSheet],
+  entryComponents: [],
   providers: [],
   bootstrap: [AppComponent]
 })

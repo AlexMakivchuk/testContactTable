@@ -1,25 +1,60 @@
 <div [@fade]>
 
   <button [routerLink]="['../add-contact']" class="example-button-row" mat-raised-button >Add Contact</button>
-  <bottom-sheet-overview-example *ngIf="toogle"></bottom-sheet-overview-example>
-  <div class="contacts" *ngIf="toogle && !contactToggle">
+  <div class="contacts" >
+    <div class="container">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="find" [(ngModel)]="findValue"></textarea>
+
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label></mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option value="name">Name</mat-option>
+          <mat-option value="phone">Phone</mat-option>
+          <mat-option value="id">Id</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <br>
     <div >
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource | findFilter: findValue: selected" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th class="element-id" mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th class="element-name" mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element">
-            <button class="element-name"  mat-button (click)="openContactInfo(element)">{{element.name}}</button></td>
+            <button [ngClass]="selectedContactId === element.id ? 'element-name-active' : 'element-name' "
+                    mat-button (click)="openContactInfo(element)">{{element.name}}
+          </button></td>
         </ng-container>
-        <ng-container matColumnDef="id">
-          <th class="element-id" mat-header-cell *matHeaderCellDef> Id </th>
-          <td mat-cell *matCellDef="let element"> <span class="element-id">{{element.id}}</span></td>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="phone">
+          <th class="element-phone" mat-header-cell *matHeaderCellDef> Phone </th>
+          <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
         </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="photo">
+          <th class="element-photo" mat-header-cell *matHeaderCellDef> Photo </th>
+          <td mat-cell *matCellDef="let element"> {{element.foto}} </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
 
 </div>
+
 </div>
-<!--  <app-add-contact *ngIf="!toogle && contactToggle"></app-add-contact>-->
-<!--  <app-open-contact-info *ngIf="!toogle && !contactToggle"></app-open-contact-info>-->

@@ -36,6 +36,7 @@ export class ContactStoreService {
   }
 
   public getSelectedContact(): Observable<ContactModel> {
+
     return this.selectedContact.asObservable();
   }
 

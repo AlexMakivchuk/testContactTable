@@ -13,18 +13,19 @@ import {fadeStateTrigger} from "../../shared/animations";
   animations:[fadeStateTrigger]
 })
 export class ContactsComponent implements OnInit {
-
-  displayedColumns: string[] = ['name', 'id'];
+  findValue= '';
+  selected = 'name';
+  displayedColumns: string[] = ['id', 'name', 'phone', 'photo'];
   dataSource;
-  active= false;
   public contacts = [];
   public contact: ContactModel = {name: ' ', phone: '', id: null, photo: ' '};
   toogle = true;
-  contactToggle = false;
+  selectedContactId= 0 ;
 
 
   constructor(public contactStoreService: ContactStoreService,
               private router: Router) {
+
   }
 
   ngOnInit() {
@@ -32,13 +33,19 @@ export class ContactsComponent implements OnInit {
       this.dataSource = x.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     });
     this.contactStoreService.loadContacts();
+    this.contactStoreService.getSelectedContact().subscribe(
+      x => {
+        if( x === null) this.selectedContactId = 0;
+         else this.selectedContactId = x.id;
+      }
+      )
   }
 
 
   openContactInfo(contact: ContactModel) {
     this.contactStoreService.selectContact(contact);
     this.router.navigate(['contact-info']);
-    return this.active = !this.active;
+
 
   }
 
